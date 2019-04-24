@@ -1,0 +1,36 @@
+{
+  "name": "sqs-router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "eslint -c .eslintrc.json .",
+    "test": "npm run lint && jest --env=node --coverage --runInBand --config jest.config.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramimoshe/sqs-router.git"
+  },
+  "author": "Rami Moshe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ramimoshe/sqs-router/issues"
+  },
+  "engines": {
+    "node": ">= 8"
+  },
+  "homepage": "https://github.com/ramimoshe/sqs-router#readme",
+  "dependencies": {
+    "aws-sdk": "^2.286.2",
+    "bluebird": "^3.5.1",
+    "joi": "^13.5.2",
+    "lodash": ">=4.17.11",
+    "sqs-consumer": "^5.2.0"
+  },
+  "devDependencies": {
+    "jest": "^22.1.2"
+  }
+}
