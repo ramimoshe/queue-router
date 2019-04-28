@@ -1,5 +1,5 @@
 # queue-router
-simple router for queues
+Simple Router For Queues
 
 [![NPM version](https://img.shields.io/npm/v/queue-router.svg?style=flat)](https://npmjs.org/package/queue-router)
 [![NPM Downloads](https://img.shields.io/npm/dm/queue-router.svg?style=flat)](https://npmjs.org/package/queue-router)
@@ -17,24 +17,33 @@ simple router for queues
  
 ### Usage
 
+##### Create Router
 ```js
-  const routerFactory = require('queue-router').routerFactory;
-
-  const router = new routerFactory.create(config);
+  const Router = require('queue-router').Router;
+  const router = new Router();
   router.add('TYPE_1', {
       handler: function(messageContent) {
           // your handling code
       }
-  })
-  router
-    .on('error', console.error)
-    .start();
+  });
 ```
 
+##### Create Worker
+```js
+  const workerFactory = require('queue-router').workerFactory;
+  const worker = workerFactory.create('SQS', router, config);
+  worker.start();
+```
 
 ### Configuration
+##### config object
   - queue
     - type: type of the queue, SQS is the only supported query right now (default SQS)
+    - config: Object
+        
+##### config for SQS
+  - queue
+    - type: SQS
     - config
       - aws
         - credentials
@@ -43,7 +52,8 @@ simple router for queues
           - secretAccessKey: (default from env AWS_SECRET_ACCESS_KEY)
         - batchSize: Size of batch (default 10)
 
-### Events
+
+### Worker Events
 - error:              Fired on general errors.
 - message_error:      Fired when an error occurs processing the message.
 - message_received:   Fired when a message is received.

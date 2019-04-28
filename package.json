@@ -1,6 +1,6 @@
 {
-  "name": "sqs-router",
-  "version": "1.0.0",
+  "name": "queue-router",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -12,17 +12,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ramimoshe/sqs-router.git"
+    "url": "git+https://github.com/ramimoshe/queue-router.git"
   },
   "author": "Rami Moshe",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ramimoshe/sqs-router/issues"
+    "url": "https://github.com/ramimoshe/queue-router/issues"
   },
   "engines": {
     "node": ">= 8"
   },
-  "homepage": "https://github.com/ramimoshe/sqs-router#readme",
+  "homepage": "https://github.com/ramimoshe/queue-router#readme",
   "dependencies": {
     "aws-sdk": "^2.286.2",
     "bluebird": "^3.5.1",
