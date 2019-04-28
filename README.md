@@ -32,25 +32,19 @@ Simple Router For Queues
 ```js
   const workerFactory = require('queue-router').workerFactory;
   const worker = workerFactory.create('SQS', router, config);
-  worker.start();
+  worker.init().then(() => worker.start());
 ```
 
 ### Configuration
-##### config object
-  - queue
-    - type: type of the queue, SQS is the only supported query right now (default SQS)
-    - config: Object
-        
+  
 ##### config for SQS
   - queue
-    - type: SQS
-    - config
-      - aws
-        - credentials
-          - region: (default from env AWS_REGION)
-          - accessKeyId: (default from env AWS_ACCESS_KEY_ID)
-          - secretAccessKey: (default from env AWS_SECRET_ACCESS_KEY)
-        - batchSize: Size of batch (default 10)
+    - aws
+      - credentials
+        - region: (default from env AWS_REGION)
+        - accessKeyId: (default from env AWS_ACCESS_KEY_ID)
+        - secretAccessKey: (default from env AWS_SECRET_ACCESS_KEY)
+      - batchSize: Size of batch (default 10)
 
 
 ### Worker Events
