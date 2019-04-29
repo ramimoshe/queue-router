@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash/fp');
+const _            = require('lodash/fp');
 const EventEmitter = require('events');
 
 
@@ -22,7 +22,7 @@ class ConsumerStub {
     }
 }
 
-class ConsumerStubRunner extends EventEmitter{
+class ConsumerStubRunner extends EventEmitter {
     constructor(handler) {
         super();
         this.handler = handler;
@@ -38,8 +38,7 @@ class ConsumerStubRunner extends EventEmitter{
                 this.handler(data, () => {
                 });
             })(this.arrayData);
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
         }
     }

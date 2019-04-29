@@ -30,10 +30,10 @@ class Worker extends EventEmitter {
         this._queue
             .on('error', error => this.emit('error', error))
             .on('message_error', error => this.emit('message_error', error))
-            .on('message_received', info => this.emit('error', info))
-            .on('message_processed', info => this.emit('error', info))
-            .on('stopped', info => this.emit('error', info))
-            .on('idle', info => this.emit('error', info));
+            .on('message_received', info => this.emit('message_received', info))
+            .on('message_processed', info => this.emit('message_processed', info))
+            .on('stopped', info => this.emit('stopped', info))
+            .on('idle', info => this.emit('idle', info));
 
         return this;
     }

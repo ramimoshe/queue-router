@@ -22,8 +22,11 @@ Simple Router For Queues
   const Router = require('queue-router').Router;
   const router = new Router();
   router.add('TYPE_1', {
-      handler: function(messageContent) {
+      handler: function(messageContent) { // Required
           // your handling code
+      },
+      validation: { // Optional
+          schema: // Joi schema, https://github.com/hapijs/joi 
       }
   });
 ```
@@ -35,6 +38,7 @@ Simple Router For Queues
   worker.init().then(() => worker.start());
 ```
 
+
 ### Configuration
   
 ##### config for SQS
@@ -45,6 +49,7 @@ Simple Router For Queues
         - accessKeyId: (default from env AWS_ACCESS_KEY_ID)
         - secretAccessKey: (default from env AWS_SECRET_ACCESS_KEY)
       - batchSize: Size of batch (default 10)
+      - queueUrl: url to sqs
 
 
 ### Worker Events

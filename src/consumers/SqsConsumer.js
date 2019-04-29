@@ -1,7 +1,7 @@
 'use strict';
 
 const AWS          = require('aws-sdk');
-const Consumer     = require('sqs-consumer');
+const { Consumer } = require('sqs-consumer');
 const BaseConsumer = require('./BaseConsumer');
 
 /* Events:
@@ -25,7 +25,7 @@ class SqsConsumer extends BaseConsumer {
 
         this.batchSize = options.aws.batchSize || 10;
         this.sqsClient = options.aws.sqsClient;
-        this.queueUrl  = options.queueUrl;
+        this.queueUrl  = options.aws.queueUrl;
     }
 
     createConsumer(handler) {
