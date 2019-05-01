@@ -6,7 +6,7 @@ Simple Router For Queues
 [![Node.js Version](https://img.shields.io/node/v/queue-router.svg?style=flat)](http://nodejs.org/download/)
 
 
-### SQS Message Format 
+### Message Format 
 ```json
 {
    "type": "TYPE_1",
@@ -17,7 +17,7 @@ Simple Router For Queues
  
 ### Usage
 
-##### Create Router
+##### Create Router (Routes messages to specific handler)
 ```js
   const Router = require('queue-router').Router;
   const router = new Router();
@@ -31,7 +31,7 @@ Simple Router For Queues
   });
 ```
 
-##### Create Worker
+##### Create Worker (Pulling message from queue and send them to the router)
 ```js
   const workerFactory = require('queue-router').workerFactory;
   const worker = workerFactory.create('SQS', router, config);
