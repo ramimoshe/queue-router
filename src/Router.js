@@ -27,7 +27,7 @@ class Router {
                 schema: Joi.object({
                     isJoi: Joi.valid(true).error(new Error('schema joi can be Joi schema only'))
                 }).unknown(),
-            }).default({ schema: Joi.any() }),
+            }).default({ schema: Joi.any() })
         }));
         if (validationResult.error) {
             throw new Error(`invalid config object, error: ${validationResult.error}`);
