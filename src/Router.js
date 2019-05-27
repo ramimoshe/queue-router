@@ -13,7 +13,7 @@ class Router {
     }
 
     getRegisteredTypes() {
-        return Array.from( this._controllers.keys());
+        return Array.from(this._controllers.keys());
     }
 
     add(type, config) {
@@ -25,9 +25,9 @@ class Router {
             handler   : Joi.func().arity(1).required(),
             validation: Joi.object({
                 schema: Joi.object({
-                    isJoi: Joi.valid(true).error(new Error('schema joi be Joi schema only'))
-                }).unknown().default(Joi.any())
-            })
+                    isJoi: Joi.valid(true).error(new Error('schema joi can be Joi schema only'))
+                }).unknown(),
+            }).default({ schema: Joi.any() }),
         }));
         if (validationResult.error) {
             throw new Error(`invalid config object, error: ${validationResult.error}`);
