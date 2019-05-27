@@ -32,8 +32,7 @@ class Router {
         if (validationResult.error) {
             throw new Error(`invalid config object, error: ${validationResult.error}`);
         }
-
-        this._controllers.set(type, config);
+        this._controllers.set(type, validationResult.value);
     }
 
     remove(type) {
