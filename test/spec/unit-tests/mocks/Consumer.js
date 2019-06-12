@@ -21,7 +21,6 @@ class ConsumerStub {
     on(message, cb) {
     }
 
-
     injectFakeResponseData(arrayData) {
         this.injectedData.push(arrayData);
     }
