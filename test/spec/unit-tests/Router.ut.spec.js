@@ -12,7 +12,7 @@ test('add - router contains 0 registered types - should add new type', async () 
     };
     router.add('TEST_ROUTE_1', routerConfig);
 
-    expect(router.get('TEST_ROUTE_1')).toEqual(routerConfig);
+    expect(router.get('TEST_ROUTE_1').handler).toEqual(routerConfig.handler);
 });
 
 test('add - trying to add route without handler - should throw Error', (done) => {
