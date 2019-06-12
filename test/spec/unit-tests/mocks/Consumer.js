@@ -1,4 +1,3 @@
-/* eslint no-unused-vars:off */
 'use strict';
 
 const _            = require('lodash/fp');
@@ -18,7 +17,7 @@ class ConsumerStub {
         return csr;
     }
 
-    on(message, cb) {
+    on() {
     }
 
     injectFakeResponseData(arrayData) {
