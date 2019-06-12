@@ -17,6 +17,9 @@ class ConsumerStub {
         return csr;
     }
 
+    on() {
+    }
+
     injectFakeResponseData(arrayData) {
         this.injectedData.push(arrayData);
     }

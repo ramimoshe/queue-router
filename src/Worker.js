@@ -26,6 +26,7 @@ class Worker extends EventEmitter {
     }
 
     init() {
+        this._consumer.on('error', error => this.emit('error', error));
         this._queue = this._consumer.createConsumer(this._handleMessage.bind(this));
         this._queue
             .on('error', error => this.emit('error', error))
