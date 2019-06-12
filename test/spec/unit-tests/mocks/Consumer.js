@@ -1,3 +1,4 @@
+/* eslint no-unused-vars:off */
 'use strict';
 
 const _            = require('lodash/fp');
@@ -18,7 +19,6 @@ class ConsumerStub {
     }
 
     on(message, cb) {
-        console.log(message, cb);
     }
 
 
