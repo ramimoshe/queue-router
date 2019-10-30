@@ -1,4 +1,3 @@
-'use strict';
 
 const Joi = require('joi');
 
@@ -22,7 +21,7 @@ class Router {
         }
 
         const validationResult = Joi.validate(config, Joi.object({
-            handler   : Joi.func().arity(1).required(),
+            handler   : Joi.func().maxArity(2).required(),
             validation: Joi.object({
                 schema: Joi.object({
                     isJoi: Joi.valid(true).error(new Error('schema joi can be Joi schema only'))
