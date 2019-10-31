@@ -33,9 +33,7 @@ class SqsConsumer extends BaseConsumer {
             messageAttributeNames  : ["All"],
             queueUrl     : this.queueUrl,
             sqs          : this.sqsClient,
-            handleMessage: async (message) => {
-                await handler(message.Body, message.MessageAttributes)
-            },
+            handleMessage: async message => await handler(message.Body, message.MessageAttributes),
             batchSize    : this.batchSize
         }).on('error', error => this.emit('error', error))
             .on('timeout_error', error => this.emit('error', error))
