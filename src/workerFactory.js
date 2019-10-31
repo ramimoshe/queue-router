@@ -2,9 +2,13 @@
 
 const Worker = require('./Worker');
 
+const Types = Object.freeze({
+    SQS: 'SQS'
+});
+
 function create(type, router, options = {}) {
     switch (type) {
-        case 'SQS': {
+        case Types.SQS: {
             const SqsConsumer = require('./consumers/SqsConsumer');
             const sqsConsumer = new SqsConsumer(options.queue);
             return new Worker(sqsConsumer, router).init();
@@ -16,5 +20,6 @@ function create(type, router, options = {}) {
 }
 
 module.exports = {
-    create: create
+    create: create,
+    Types: Types
 };

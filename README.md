@@ -17,12 +17,12 @@ Simple Router For Queues
  
 ### Usage
 
-##### Create Router (Routes messages to specific handler)
+#### Create Router (Routes messages to specific handler)
 ```js
   const Router = require('queue-router').Router;
   const router = new Router();
   router.add('TYPE_1', {
-      handler: function(messageContent) { // Required
+      handler: function(messageContent, attributes) { // Required
           // your handling code
       },
       validation: { // Optional
@@ -31,17 +31,24 @@ Simple Router For Queues
   });
 ```
 
-##### Create Worker (Pulling message from queue and send them to the router)
+#### Create Worker (Pulling message from queue and send them to the router)
 ```js
   const workerFactory = require('queue-router').workerFactory;
-  const worker = workerFactory.create('SQS', router, config);
+  const worker = workerFactory.create(workerFactory.Types.SQS, router, config);
   worker.init().then(() => worker.start());
 ```
 
-
-### Configuration
-  
-##### config for SQS
+### workerFactory
+workers generator
+#### Functionalities
+##### create(worker_type, router, config)
+Create new worker
+#### Entities
+##### Types
+Includes all types of worker to listen
+###### SQS
+AWS SQS resource
+config:
   - queue
     - aws
       - credentials
@@ -51,6 +58,26 @@ Simple Router For Queues
       - batchSize: Size of batch (default 10)
       - queueUrl: url to sqs
 
+
+### worker
+#### Functionalities
+##### init()
+inititalize worker 
+##### start()
+start worker (start listen to queue and pull messages)
+
+
+### Router
+#### Functionalities
+##### add(message_type, config_object)
+add new route
+#### Entities
+##### config_object
+route configuration
+config: 
+  - handler: handler function
+  - validation: validation using Joi
+  
 
 ### Worker Events
 - error:              Fired on general errors.
