@@ -2,7 +2,7 @@
 
 const _            = require('lodash/fp');
 const EventEmitter = require('events');
-  
+
 class ConsumerStub {
     constructor() {
         this.injectedData = [];
@@ -39,9 +39,9 @@ class ConsumerStubRunner extends EventEmitter {
 
     start() {
         try {
+            const attributes = _.get('attributes')(this.data);
             _.each((msg) => {
-                    const attributes = _.get('attributes')(this.data); //_.getOr(undefined ,'attributes')(this.data)
-                    this.handler(msg, attributes, () => {
+                this.handler(msg, attributes, () => {
                 });
             })(this.data.msg);
 
