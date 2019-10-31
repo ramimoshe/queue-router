@@ -92,18 +92,18 @@ test('start - 1 valid message and atttributes array with existing controller - s
 
     const expectedMessageAttributes = {
         sender : {
-            StringValue     : "test",
+            StringValue     : 'test',
             StringListValues: [],
             BinaryListValues: [],
-            DataType        : "String"
+            DataType        : 'String'
         },
         version: {
-            StringValue     : "1",
+            StringValue     : '1',
             StringListValues: [],
             BinaryListValues: [],
-            DataType        : "Number"
+            DataType        : 'Number'
         }
-    }
+    };
 
  
 

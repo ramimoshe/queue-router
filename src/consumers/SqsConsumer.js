@@ -30,7 +30,7 @@ class SqsConsumer extends BaseConsumer {
 
     createConsumer(handler) {
         return Consumer.create({
-            messageAttributeNames  : ["All"],
+            messageAttributeNames  : ['All'],
             queueUrl     : this.queueUrl,
             sqs          : this.sqsClient,
             handleMessage: async message => await handler(message.Body, message.MessageAttributes),
