@@ -1,6 +1,6 @@
 {
   "name": "queue-router",
-  "version": "0.2.3",
+  "version": "0.3.3",
   "description": "",
   "main": "index.js",
   "directories": {
