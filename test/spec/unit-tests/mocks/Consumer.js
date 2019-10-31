@@ -3,7 +3,6 @@
 const _            = require('lodash/fp');
 const EventEmitter = require('events');
 
-
 class ConsumerStub {
     constructor() {
         this.injectedData = [];
@@ -20,8 +19,11 @@ class ConsumerStub {
     on() {
     }
 
-    injectFakeResponseData(arrayData) {
-        this.injectedData.push(arrayData);
+    injectFakeResponseData(msg, attributes) {
+        this.injectedData.push({
+            msg,
+            attributes: attributes
+        });
     }
 }
 
@@ -31,16 +33,19 @@ class ConsumerStubRunner extends EventEmitter {
         this.handler = handler;
     }
 
-    injectFakeResponseData(arrayData) {
-        this.arrayData = arrayData;
+    injectFakeResponseData(data) {
+        this.data = data;
     }
 
     start() {
         try {
-            _.each((data) => {
-                this.handler(data, () => {
+            const attributes = _.get('attributes')(this.data);
+            _.each((msg) => {
+                this.handler(msg, attributes, () => {
                 });
-            })(this.arrayData);
+            })(this.data.msg);
+
+
         } catch (err) {
             console.log(err);
         }

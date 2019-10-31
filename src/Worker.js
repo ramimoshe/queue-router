@@ -47,7 +47,7 @@ class Worker extends EventEmitter {
         this._queue.stop();
     }
 
-    async _handleMessage(message) {
+    async _handleMessage(message, attributes) {
         try {
             const jsonMessage = JSON.parse(message);
             if (this._validateMessage(jsonMessage, this.messageSchema).error) return;
@@ -57,7 +57,7 @@ class Worker extends EventEmitter {
             if (contentValidationResult.error) return;
 
             this.emit('message', { type: jsonMessage.type, status: messageStatuses.processing });
-            await controller.handler(contentValidationResult.value);
+            await controller.handler(contentValidationResult.value, attributes);
             this.emit('message', { type: jsonMessage.type, status: messageStatuses.proceed });
         } catch (error) {
             this.emit('error', error);
