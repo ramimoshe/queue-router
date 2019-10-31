@@ -98,7 +98,7 @@ test('start - 1 valid message and atttributes array with existing controller - s
             DataType: "String"
         },
         version: {
-            IntegerValue: "1.0",
+            IntegerValue: 1,
             IntegerListValues: [],
             BinaryListValues: [],
             DataType: "Integer"
