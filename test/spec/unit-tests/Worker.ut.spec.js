@@ -90,7 +90,7 @@ test('start - 1 valid message and atttributes array with existing controller - s
         }
     };
 
-    var expectedMessageAttributes = {
+    const expectedMessageAttributes = {
         sender : {
             StringValue     : "test",
             StringListValues: [],
