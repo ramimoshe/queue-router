@@ -90,23 +90,25 @@ test('start - 1 valid message and atttributes array with existing controller - s
         }
     };
 
-   var expectedMessageAttributes = {
-        sender: {
-            StringValue: "test",
+    var expectedMessageAttributes = {
+        sender : {
+            StringValue     : "test",
             StringListValues: [],
             BinaryListValues: [],
-            DataType: "String"
+            DataType        : "String"
         },
         version: {
-            IntegerValue: 1,
-            IntegerListValues: [],
+            StringValue     : "1",
+            StringListValues: [],
             BinaryListValues: [],
-            DataType: "Integer"
+            DataType        : "Number"
         }
-      }
-     
+    }
+
+ 
+
     consumerStub.injectFakeResponseData([JSON.stringify(expectedMessage)], expectedMessageAttributes);
-    
+
     const router = new Router();
     router.add('TEST_CONTROLLER1', {
         handler      : (msg, attributes) => {
