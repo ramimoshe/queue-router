@@ -8,10 +8,10 @@ Simple Router For Queues
 [Full documentation](https://github.com/ramimoshe/queue-router/wiki/Getting-started)
 
 ### Message Format 
-```json
+```js
 {
    "type": "TYPE_1",
-   "content": { /* your message */ }
+   "content": // your message, can be any type (object, string, init, ...)
 }
 ```
 
@@ -42,16 +42,20 @@ Simple Router For Queues
 
 ### Configuration
   
-##### config for SQS
-  - queue
-    - aws
-      - credentials
-        - region: (default from env AWS_REGION)
-        - accessKeyId: (default from env AWS_ACCESS_KEY_ID)
-        - secretAccessKey: (default from env AWS_SECRET_ACCESS_KEY)
-      - batchSize: Size of batch (default 10)
-      - queueUrl: url to sqs
-
+##### SQS Config
+``` js
+{
+   "queue": { // object, required
+      "aws": { // object, required
+         "credentials": { // object, optional
+            "region": "", // string, optional, (default from env AWS_REGION)
+            "accessKeyId": "", // string, optional, (default from env AWS_ACCESS_KEY_ID)
+            "secretAccessKey": "", // string, optional, (default from env secretAccessKey)
+         },
+         "batchSize": "", //int, optional, (size of batch, default 10)
+         "queueUrl": "", //string, required, (url to sqs)
+}
+```
 
 ### Worker Events
 - error:              Fired on general errors.
