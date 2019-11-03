@@ -5,7 +5,7 @@ Simple Router For Queues
 [![NPM Downloads](https://img.shields.io/npm/dm/queue-router.svg?style=flat)](https://npmjs.org/package/queue-router)
 [![Node.js Version](https://img.shields.io/node/v/queue-router.svg?style=flat)](http://nodejs.org/download/)
 
-[Full documantation](https://github.com/ramimoshe/queue-router/wiki/Getting-started)
+[Full documentation](https://github.com/ramimoshe/queue-router/wiki/Getting-started)
 
 ### Message Format 
 ```json
