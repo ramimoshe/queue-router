@@ -1,14 +1,13 @@
 /* eslint no-unused-vars:off */
 'use strict';
 
-const Promise      = require('bluebird');
 const Joi          = require('joi');
 const Worker       = require('../../../src/Worker');
 const Router       = require('../../../src/Router');
 const ConsumerMock = require('./mocks/Consumer');
 
 
-test('start - 1 valid message and undefined atttributes with existing controller - should call TEST_CONTROLLER1 handler', async (done) => {
+test('start - 1 valid message and undefined attributes with existing controller - should call TEST_CONTROLLER1 handler', async (done) => {
     const consumerStub    = new ConsumerMock();
     const expectedMessage = {
         type   : 'TEST_CONTROLLER1',
@@ -32,7 +31,6 @@ test('start - 1 valid message and undefined atttributes with existing controller
     });
     const worker = new Worker(consumerStub, router).init();
     worker.start();
-    await Promise.delay(100);
 });
 
 test('start - 1 valid message without existing controller - should not call TEST_CONTROLLER1 handler & emit error', async (done) => {
@@ -54,7 +52,6 @@ test('start - 1 valid message without existing controller - should not call TEST
     worker.on('error', () => {
         done();
     }).start();
-    await Promise.delay(100);
 });
 
 test('start - 1 invalid message with existing controller - should not call TEST_CONTROLLER1 handler', async (done) => {
@@ -78,10 +75,9 @@ test('start - 1 invalid message with existing controller - should not call TEST_
     worker.on('error', () => {
         done();
     }).start();
-    await Promise.delay(100);
 });
 
-test('start - 1 valid message and atttributes array with existing controller - should call TEST_CONTROLLER1 handler', async (done) => {
+test('start - 1 valid message and attributes array with existing controller - should call TEST_CONTROLLER1 handler', async (done) => {
     const consumerStub    = new ConsumerMock();
     const expectedMessage = {
         type   : 'TEST_CONTROLLER1',
@@ -105,8 +101,6 @@ test('start - 1 valid message and atttributes array with existing controller - s
         }
     };
 
- 
-
     consumerStub.injectFakeResponseData([JSON.stringify(expectedMessage)], expectedMessageAttributes);
 
     const router = new Router();
@@ -125,5 +119,33 @@ test('start - 1 valid message and atttributes array with existing controller - s
     worker.on('error', () => {
         done();
     }).start();
-    await Promise.delay(100);
+});
+
+test('start - 1 valid message and ackOnMessageError=true - should call TEST_CONTROLLER1 handler', async (done) => {
+    const worker = new Worker({}, {});
+    worker.on('error', () => {
+    });
+    await worker._handleMessage(JSON.stringify({
+        type   : 'TEST_CONTROLLER1',
+        content: {
+            age: 19
+        }
+    }));
+    done();
+});
+
+test('start - 1 valid message and ackOnMessageError=false - should call TEST_CONTROLLER1 handler', async (done) => {
+    const worker = new Worker({}, {}, { ackOnMessageError: false });
+    worker.on('error', () => {
+    });
+    try {
+        await worker._handleMessage(JSON.stringify({
+            type   : 'TEST_CONTROLLER1',
+            content: {
+                age: 19
+            }
+        }));
+    } catch (error) {
+        done();
+    }
 });

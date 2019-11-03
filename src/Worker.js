@@ -12,10 +12,12 @@ const messageStatuses = {
 
 
 class Worker extends EventEmitter {
-    constructor(consumer, router) {
+    constructor(consumer, router, options = {}) {
         super();
         this._consumer = consumer;
-        this.router = router;
+        this.router    = router;
+        this.options   = options;
+        if (_.isNil(this.options.ackOnMessageError)) this.options.ackOnMessageError = true;
     }
 
     get messageSchema() {
@@ -61,6 +63,7 @@ class Worker extends EventEmitter {
             this.emit('message', { type: jsonMessage.type, status: messageStatuses.proceed });
         } catch (error) {
             this.emit('error', error);
+            if (!this.options.ackOnMessageError) throw error;
         }
     }
 
