@@ -5,6 +5,7 @@ Simple Router For Queues
 [![NPM Downloads](https://img.shields.io/npm/dm/queue-router.svg?style=flat)](https://npmjs.org/package/queue-router)
 [![Node.js Version](https://img.shields.io/node/v/queue-router.svg?style=flat)](http://nodejs.org/download/)
 
+[Full documantation](https://github.com/ramimoshe/queue-router/wiki/Getting-started)
 
 ### Message Format 
 ```json
@@ -38,17 +39,10 @@ Simple Router For Queues
   worker.init().then(() => worker.start());
 ```
 
-### workerFactory
-workers generator
-#### Functionalities
-##### create(worker_type, router, config)
-Create new worker
-#### Entities
-##### Types
-Includes all types of worker to listen
-###### SQS
-AWS SQS resource
-config:
+
+### Configuration
+  
+##### config for SQS
   - queue
     - aws
       - credentials
@@ -58,26 +52,6 @@ config:
       - batchSize: Size of batch (default 10)
       - queueUrl: url to sqs
 
-
-### worker
-#### Functionalities
-##### init()
-inititalize worker 
-##### start()
-start worker (start listen to queue and pull messages)
-
-
-### Router
-#### Functionalities
-##### add(message_type, config_object)
-add new route
-#### Entities
-##### config_object
-route configuration
-config: 
-  - handler: handler function
-  - validation: validation using Joi
-  
 
 ### Worker Events
 - error:              Fired on general errors.
