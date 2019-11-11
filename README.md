@@ -46,7 +46,7 @@ Simple Router For Queues
 ``` js
 {
    "queue": { // object, required
-      "ackOnMessageError": "" // boolean, optional, (send ack when handle funcrion failed, default true)
+      "ackOnMessageError": "" // boolean, optional, (send ack when handle function failed, default true)
       "aws": { // object, required
          "credentials": { // object, optional
             "region": "", // string, optional, (default from env AWS_REGION)
