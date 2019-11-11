@@ -11,7 +11,7 @@ function create(type, router, options = {}) {
         case Types.SQS: {
             const SqsConsumer = require('./consumers/SqsConsumer');
             const sqsConsumer = new SqsConsumer(options.queue);
-            return new Worker(sqsConsumer, router).init();
+            return new Worker(sqsConsumer, router, options.queue).init();
         }
         default: {
             throw new Error('Unsupported type');
