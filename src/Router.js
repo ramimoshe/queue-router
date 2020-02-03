@@ -3,7 +3,8 @@ const Joi = require('joi');
 
 
 class Router {
-    constructor() {
+    constructor(config) {
+        this.trace = _.getOr(false, 'trace')(config);    
         this._controllers = new Map();
     }
 
