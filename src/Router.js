@@ -1,6 +1,6 @@
 
 const Joi = require('joi');
-
+const _   = require('lodash/fp');
 
 class Router {
     constructor(config) {
