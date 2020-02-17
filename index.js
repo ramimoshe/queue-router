@@ -2,5 +2,5 @@
 
 module.exports = {
     workerFactory: require('./src/workerFactory'),
-    Router       : require('./src/Router')
+    Router: require('./src/Router')
 };

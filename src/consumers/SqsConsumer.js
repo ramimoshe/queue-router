@@ -1,6 +1,6 @@
 'use strict';
 
-const AWS          = require('aws-sdk');
+const AWS = require('aws-sdk');
 const { Consumer } = require('sqs-consumer');
 const BaseConsumer = require('./BaseConsumer');
 
@@ -18,23 +18,23 @@ class SqsConsumer extends BaseConsumer {
         super();
 
         AWS.config.update({
-            region         : options.aws.credentials.region || process.env.AWS_REGION,
-            accessKeyId    : options.aws.credentials.accessKeyId || process.env.AWS_ACCESS_KEY_ID,
+            region: options.aws.credentials.region || process.env.AWS_REGION,
+            accessKeyId: options.aws.credentials.accessKeyId || process.env.AWS_ACCESS_KEY_ID,
             secretAccessKey: options.aws.credentials.secretAccessKey || process.env.AWS_SECRET_ACCESS_KEY
         });
 
         this.batchSize = options.aws.batchSize || 10;
         this.sqsClient = options.aws.sqsClient;
-        this.queueUrl  = options.aws.queueUrl;
+        this.queueUrl = options.aws.queueUrl;
     }
 
     createConsumer(handler) {
         return Consumer.create({
-            messageAttributeNames  : ['All'],
-            queueUrl     : this.queueUrl,
-            sqs          : this.sqsClient,
+            messageAttributeNames: ['All'],
+            queueUrl: this.queueUrl,
+            sqs: this.sqsClient,
             handleMessage: async message => await handler(message.Body, message.MessageAttributes),
-            batchSize    : this.batchSize
+            batchSize: this.batchSize
         }).on('error', error => this.emit('error', error))
             .on('timeout_error', error => this.emit('error', error))
             .on('processing_error', error => this.emit('message_error', error))

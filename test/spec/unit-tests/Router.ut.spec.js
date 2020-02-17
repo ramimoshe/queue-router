@@ -5,7 +5,7 @@ const Router = require('../../../src/Router');
 
 
 test('add - router contains 0 registered types - should add new type', async () => {
-    const router       = new Router();
+    const router = new Router();
     const routerConfig = {
         handler: (msg, attributes) => {
         }
@@ -16,7 +16,7 @@ test('add - router contains 0 registered types - should add new type', async () 
 });
 
 test('add - trying to add route without handler - should throw Error', (done) => {
-    const router       = new Router();
+    const router = new Router();
     const routerConfig = {};
     try {
         router.add('TEST_ROUTE_1', routerConfig);
@@ -26,7 +26,7 @@ test('add - trying to add route without handler - should throw Error', (done) =>
 });
 
 test('add - trying to add route twice - should throw Error', (done) => {
-    const router       = new Router();
+    const router = new Router();
     const routerConfig = {
         handler: (msg, attributes) => {
         }
@@ -44,7 +44,7 @@ test('add - trying to add route twice - should throw Error', (done) => {
 });
 
 test('keys - router contains 1 registered types - should return 1 type', async () => {
-    const router       = new Router();
+    const router = new Router();
     const routerConfig = {
         handler: (msg, attributes) => {
         }
