@@ -12,10 +12,10 @@ const messageStatuses = {
     proceed: 'PROCEED'
 };
 
-const timeout = (span) => {
-    span.timeout = setTimeout(() => {
-        span.finish();
+const timeout = (span, endTrace) => {
+    span.timeout = setTimeout(() => {        
         span.setTag("span.timeout", true);
+        endTrace(span);
     }, TWO_HOURS_IN_MS);
     return span;
 }
@@ -69,7 +69,7 @@ class Worker extends EventEmitter {
             spanOptions.childOf = this.tracer.extract(FORMAT_TEXT_MAP, carrier);
         }
 
-        return timeout(this.tracer.startSpan('handleMessage', spanOptions));
+        return timeout(this.tracer.startSpan('handleMessage', spanOptions), this.endTrace);
     }
 
     endTrace(span) {
