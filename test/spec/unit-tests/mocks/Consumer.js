@@ -1,12 +1,12 @@
 'use strict';
 
-const _            = require('lodash/fp');
+const _ = require('lodash/fp');
 const EventEmitter = require('events');
 
 class ConsumerStub {
     constructor() {
         this.injectedData = [];
-        this.queueNumber  = 0;
+        this.queueNumber = 0;
     }
 
     createConsumer(handler) {

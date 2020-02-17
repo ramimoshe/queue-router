@@ -1,9 +1,10 @@
 
 const Joi = require('joi');
-
+const _ = require('lodash/fp');
 
 class Router {
-    constructor() {
+    constructor(config) {
+        this.trace = _.getOr(false, 'trace')(config);
         this._controllers = new Map();
     }
 
@@ -21,7 +22,7 @@ class Router {
         }
 
         const validationResult = Joi.validate(config, Joi.object({
-            handler   : Joi.func().maxArity(2).required(),
+            handler: Joi.func().maxArity(3).required(),
             validation: Joi.object({
                 schema: Joi.object({
                     isJoi: Joi.valid(true).error(new Error('schema joi can be Joi schema only'))

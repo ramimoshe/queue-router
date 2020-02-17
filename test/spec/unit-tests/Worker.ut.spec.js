@@ -1,17 +1,17 @@
 /* eslint no-unused-vars:off */
 'use strict';
 
-const Promise      = require('bluebird');
-const Joi          = require('joi');
-const Worker       = require('../../../src/Worker');
-const Router       = require('../../../src/Router');
+const Promise = require('bluebird');
+const Joi = require('joi');
+const Worker = require('../../../src/Worker');
+const Router = require('../../../src/Router');
 const ConsumerMock = require('./mocks/Consumer');
 
 
 test('start - 1 valid message and undefined atttributes with existing controller - should call TEST_CONTROLLER1 handler', async (done) => {
-    const consumerStub    = new ConsumerMock();
+    const consumerStub = new ConsumerMock();
     const expectedMessage = {
-        type   : 'TEST_CONTROLLER1',
+        type: 'TEST_CONTROLLER1',
         content: {
             age: 19
         }
@@ -19,7 +19,7 @@ test('start - 1 valid message and undefined atttributes with existing controller
     consumerStub.injectFakeResponseData([JSON.stringify(expectedMessage)]);
     const router = new Router();
     router.add('TEST_CONTROLLER1', {
-        handler   : (msg, attributes) => {
+        handler: (msg, attributes) => {
             expect(msg).toEqual(expectedMessage.content);
             expect(attributes).toEqual(undefined);
             done();
@@ -36,9 +36,9 @@ test('start - 1 valid message and undefined atttributes with existing controller
 });
 
 test('start - 1 valid message without existing controller - should not call TEST_CONTROLLER1 handler & emit error', async (done) => {
-    const consumerStub    = new ConsumerMock();
+    const consumerStub = new ConsumerMock();
     const expectedMessage = {
-        type   : 'TEST_CONTROLLER1',
+        type: 'TEST_CONTROLLER1',
         content: {
             age: 19
         }
@@ -58,9 +58,9 @@ test('start - 1 valid message without existing controller - should not call TEST
 });
 
 test('start - 1 invalid message with existing controller - should not call TEST_CONTROLLER1 handler', async (done) => {
-    const consumerStub    = new ConsumerMock();
+    const consumerStub = new ConsumerMock();
     const expectedMessage = {
-        type   : 'TEST_CONTROLLER1',
+        type: 'TEST_CONTROLLER1',
         content: {
             age: 19
         }
@@ -68,7 +68,7 @@ test('start - 1 invalid message with existing controller - should not call TEST_
     consumerStub.injectFakeResponseData([JSON.stringify(expectedMessage)]);
     const router = new Router();
     router.add('TEST_CONTROLLER1', {
-        handler      : (msg, attributes) => {
+        handler: (msg, attributes) => {
             done('should not be called');
         }, validation: {
             schema: Joi.string()
@@ -82,36 +82,36 @@ test('start - 1 invalid message with existing controller - should not call TEST_
 });
 
 test('start - 1 valid message and atttributes array with existing controller - should call TEST_CONTROLLER1 handler', async (done) => {
-    const consumerStub    = new ConsumerMock();
+    const consumerStub = new ConsumerMock();
     const expectedMessage = {
-        type   : 'TEST_CONTROLLER1',
+        type: 'TEST_CONTROLLER1',
         content: {
             age: 19
         }
     };
 
     const expectedMessageAttributes = {
-        sender : {
-            StringValue     : 'test',
+        sender: {
+            StringValue: 'test',
             StringListValues: [],
             BinaryListValues: [],
-            DataType        : 'String'
+            DataType: 'String'
         },
         version: {
-            StringValue     : '1',
+            StringValue: '1',
             StringListValues: [],
             BinaryListValues: [],
-            DataType        : 'Number'
+            DataType: 'Number'
         }
     };
 
- 
+
 
     consumerStub.injectFakeResponseData([JSON.stringify(expectedMessage)], expectedMessageAttributes);
 
     const router = new Router();
     router.add('TEST_CONTROLLER1', {
-        handler      : (msg, attributes) => {
+        handler: (msg, attributes) => {
             expect(msg).toEqual(expectedMessage.content);
             expect(attributes).toEqual(expectedMessageAttributes.content);
             done();
